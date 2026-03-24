@@ -40,6 +40,23 @@ const getAllEvents = async (req, res) => {
   }
 };
 
+// internal function to avoid code redundance
+const fetchFullEvent = async (id) => {
+  return await Event.findByPk(id, {
+    include: [
+      { 
+        model: Team, 
+        as: 'homeTeam', 
+        include: [Sport] 
+      },
+      { 
+        model: Team, 
+        as: 'awayTeam' 
+      }
+    ]
+  });
+};
+
 const addNewEvent = async (req, res) => {
   try {
     const { starts_at, home_team_id, away_team_id } = req.body;
@@ -58,19 +75,7 @@ const addNewEvent = async (req, res) => {
       away_team_id: parseInt(away_team_id)
     });
 
-    const fullEvent = await Event.findByPk(newEvent.id, {
-      include: [
-        { 
-          model: Team, 
-          as: 'homeTeam', 
-          include: [{ model: Sport }] 
-        },
-        { 
-          model: Team, 
-          as: 'awayTeam',
-        }
-      ]
-    });
+    const fullEvent = await fetchFullEvent(newEvent.id)
 
     res.status(201).json(fullEvent);
   } catch (err) {
@@ -79,4 +84,16 @@ const addNewEvent = async (req, res) => {
   }
 };
 
-module.exports = { getAllEvents, addNewEvent };
+const getEventById = async (req, res) => {
+  try {
+    const event = await fetchFullEvent(req.params.id);
+
+    if (!event) return res.status(404).json({ error: "Event not found" });
+    
+    res.json(event);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { getAllEvents, addNewEvent, getEventById };

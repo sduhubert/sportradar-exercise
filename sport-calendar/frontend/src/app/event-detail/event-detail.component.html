@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="event-detail-container" *ngIf="event">
+        <h2>Event Details</h2>
+        <p>{{ event.homeTeam.Sport.name }}</p>
+        <div class="matchup-header">
+            <div class="team-box left">
+                <h3>{{ event.homeTeam.name }}<br>(Home)</h3>
+            </div>
+            <div class="vs-divider middle">
+                VS
+            </div>
+            <div class="team-box right">
+                <h3>{{ event.awayTeam.name }}<br>(Away)</h3>
+            </div>
+        </div>
+        <div class="event-info">
+            <p><strong>Scheduled for</strong><br>{{ event.starts_at | date:'fullDate' }} at {{ event.starts_at | date:'shortTime' }}</p>
+        </div>
+        <button class="back-btn" routerLink="/">Back to Calendar</button>
+    </div>
+    <div *ngIf="!event">
+    <p>Loading event details...</p>
+    </div>
+</div>

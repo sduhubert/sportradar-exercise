@@ -61,7 +61,7 @@
         </form>
       </div>
       <div class="main-content-body">
-        <div *ngFor="let event of events" class="event-line">
+        <div *ngFor="let event of events" class="event-line" [routerLink]="['/event', event.id]">
           <p><b>{{ event.starts_at | date:"EEE., dd.MM.yyyy, HH:mm" }},</b></p>
           <p>{{ event.homeTeam.Sport.name }}</p>
           <p class="team-names">{{ event.homeTeam.name }} vs {{ event.awayTeam.name }}</p>

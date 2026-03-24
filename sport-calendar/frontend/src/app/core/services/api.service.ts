@@ -35,4 +35,8 @@ export class ApiService {
   postEvent(newEvent: CreateEventRequest): Observable<SportEvent> {
     return this.http.post<SportEvent>(`${this.apiUrl}/events/new`, newEvent);
   }
+
+  getEventById(eventId: number): Observable<SportEvent> {
+    return this.http.get<SportEvent>(`${this.apiUrl}/events/${eventId}`);
+  }
 }

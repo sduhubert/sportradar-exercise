@@ -5,11 +5,12 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Sport } from '../core/interfaces/sport';
 import { FormsModule } from '@angular/forms';
 import { Team } from '../core/interfaces/team';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, DatePipe, FormsModule, NgIf],
+  imports: [NgFor, DatePipe, FormsModule, NgIf, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
