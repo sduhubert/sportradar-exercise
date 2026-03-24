@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { getAllEvents } = require('../controllers/events');
-const parseEventHeaders = require('../middleware/eventHeaders');
+const { getAllEvents, addNewEvent } = require('../controllers/events');
 
-router.get('/', parseEventHeaders, getAllEvents);
+router.get('/', getAllEvents);
+router.post('/new', addNewEvent)
 
 module.exports = router;
