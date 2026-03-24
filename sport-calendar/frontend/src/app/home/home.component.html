@@ -2,11 +2,71 @@
   <div class="sidebar">
     <div class="new-event-form-container">
       <div class="form-header">
-        New event
+        Create a new event
       </div>
       <div class="form-body">
-        <p>team</p>
-        <p>sport</p>
+        <form (ngSubmit)="onAddEvent(dateInput.value, homeSelect.value, awaySelect.value)" class="form-body">
+          
+          <label for="new-date">Date</label>
+          <input #dateInput type="datetime-local" id="new-date" [value]="defaultDate">
+
+          <p>Sport</p>
+          <select #sportSelect (change)="onSportChange($event)">
+            <option value="">Select a sport</option>
+            <option *ngFor="let s of sports" [value]="s.id">{{s.name}}</option>
+          </select>
+
+          <p>Home Team</p>
+          <select #homeSelect [disabled]="filteredTeams.length === 0">
+            <option value="">-- Select Home --</option>
+            <option *ngFor="let team of filteredTeams" [value]="team.id">{{team.name}}</option>
+          </select>
+
+          <p>Away Team</p>
+          <select #awaySelect [disabled]="filteredTeams.length === 0">
+            <option value="">-- Select Away --</option>
+            <option *ngFor="let team of filteredTeams" [value]="team.id">{{team.name}}</option>
+          </select>
+
+          <button type="submit" style="margin-top: 10px;">Create Event</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="main-content-container">
+      <div class="main-content-header">
+        <h1>Event calendar</h1>
+      </div>
+      <div>
+        <form class="filters-form" (ngSubmit)="onSearch($event)">
+          <label for="sport">Sport:</label>
+          <select #sport id="sport" name="sport">
+            <option value="">All</option>
+            <option *ngFor="let sport of sports" [value]="sport.id">{{sport.name}} </option>
+          </select>
+
+          <label for="date-from">Date from:</label>
+          <input #date type="datetime-local" id="date-from" name="date-from" [value]="defaultDate">
+
+          <label for="date-from">Results:</label>
+          <select #count id="count" name="count">
+            <option value="100">100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="main-content-body">
+        <div *ngFor="let event of events" class="event-line">
+          <p><b>{{ event.starts_at | date:"EEE., dd.MM.yyyy, HH:mm" }},</b></p>
+          <p>{{ event.homeTeam.Sport.name }}</p>
+          <p class="team-names">{{ event.homeTeam.name }} vs {{ event.awayTeam.name }}</p>
+        </div>
+        <p *ngIf="events.length === 0">No events found.</p>
       </div>
     </div>
   </div>

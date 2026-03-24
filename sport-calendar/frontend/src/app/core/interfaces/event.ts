@@ -1,6 +1,6 @@
 import { Team } from "./team";
 
-export interface Event {
+export interface SportEvent {
     id: number;
     starts_at: string;
     homeTeam: Team;
