@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-router.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
+router.use('/events', require('./events'));
+router.use('/sports', require('./sports'));
+router.use('/teams', require('./teams'));
 
 module.exports = router;
