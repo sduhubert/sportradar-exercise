@@ -1,0 +1,11 @@
+Project development was supported by AI.
+
+The main use of AI technologies was optimizing the time it would take to develop the project,
+given the short deadline, alongside debugging, bugfixing, and syntax-related corrections.
+
+AI provided extensive help when it came to any issues with docker containerization, 
+data inconsistencies between service interfaces, and general support with
+solutions that in my mind would work, even when they didn't.
+
+AI was also used for a considerable part of the UI design, as it was not the main goal
+of the task, yet I still wanted to ensure it looked presentable and readable.
